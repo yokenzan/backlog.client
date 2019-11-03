@@ -7,7 +7,10 @@ class Priority:
         self.name      = name
 
     def __str__(self):
-        return 'Priority: ' + ', '.join([
+        return ', '.join([
             str(self.id),
             self.name,
         ])
+
+    def to_list_item(self) -> str:
+        return f'{str(self.id)} # {self.name}'

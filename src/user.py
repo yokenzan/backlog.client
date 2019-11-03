@@ -11,4 +11,6 @@ class User:
     def __str__(self):
         return self.name
 
+    def to_list_item(self) -> str:
+        return f'{str(self.id)} # {self.name}'
 
