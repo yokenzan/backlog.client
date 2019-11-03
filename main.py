@@ -47,39 +47,37 @@ class IssuePrinter:
         return f'{keyId:<5} - {summary}'
 
 
-class IssueFactory:
 
-    def generate(self, row: dict) -> Issue:
-        return Issue(
-            row['id'],
-            row['issueKey'],
-            row['keyId'],
-            self.generateIssueType(row['issueType']),
-            row['summary'],
-            row['description'],
-            self.generateUser(row['assignee']),
-            self.generatePriority(row['priority']),
-            self.generateIssueStatus(row['status'])
-        )
+class IssueTypeFactory:
 
-    def generateIssueType(self, params: dict) -> IssueType:
+    def generate(self, params: dict) -> IssueType:
         return IssueType(
             params['id'], params['name'], params['color'], params['displayOrder']
         )
 
-    def generateIssueStatus(self, params: dict) -> IssueStatus:
+
+class IssueStatusFactory:
+
+    def generate(self, params: dict) -> IssueStatus:
         return IssueStatus(
             params['id'], params['name'], params['color'], params['displayOrder']
         )
 
-    def generatePriority(self, params: dict) -> Priority:
+
+class PriorityFactory:
+
+    def generate(self, params: dict) -> Priority:
         return Priority(params['id'], params['name'])
 
-    def generateUser(self, params: Optional[dict]) -> Optional[User]:
+
+class UserFactory:
+
+    def generate(self, params: Optional[dict]) -> Optional[User]:
         if params is None:
             return None
         else:
             return User(params['id'], params['userId'], params['name'], params['roleType'])
+
 
 
 class UpdateStatus:
@@ -93,6 +91,31 @@ class UpdateStatus:
             self.timestamp,
             str(self.user),
         ])
+
+class IssueFactory:
+
+    def __init__(
+            self,
+            userFactory:        UserFactory,
+            issueTypeFactory:   IssueTypeFactory,
+            issueStatusFactory: IssueStatusFactory,
+            priorityFactory:    PriorityFactory
+    ):
+        self.issueTypeFactory = issueTypeFactory
+
+    def generate(self, row: dict) -> Issue:
+        return Issue(
+            row['id'],
+            row['issueKey'],
+            row['keyId'],
+            self.issueTypeFactory.generate(row['issueType']),
+            row['summary'],
+            row['description'],
+            self.userFactory.generate(row['assignee']),
+            self.priorityFactory.generate(row['priority']),
+            self.issueStatusFactory.generate(row['status'])
+        )
+
 
 
 
