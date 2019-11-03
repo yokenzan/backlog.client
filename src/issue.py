@@ -10,7 +10,18 @@ from src.priority     import *
 
 class Issue:
 
-    def __init__(self, id: int, issueKey: str, keyId: int, issueType: IssueType, summary: str, description: str, assignee: Optional[User], priority: Priority, status: IssueStatus):
+    def __init__(
+            self,
+            id:          int,
+            issueKey:    str,
+            keyId:       int,
+            issueType:   IssueType,
+            summary:     str,
+            description: str,
+            assignee:    Optional[User],
+            priority:    Priority,
+            status:      IssueStatus
+        ):
         self.id          = id
         self.issueKey    = issueKey
         self.keyId       = keyId

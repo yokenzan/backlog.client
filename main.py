@@ -4,13 +4,7 @@
 import requests, json
 from typing import Union, List, Optional
 
-from src.user         import *
-from src.issue_status import *
-from src.issue_type   import *
-from src.issue        import *
-from src.priority     import *
-from src.project      import *
-
+from src.factories.issue_factory import *
 
 class UrlGenerator:
 
@@ -47,39 +41,6 @@ class IssuePrinter:
         return f'{keyId:<5} - {summary}'
 
 
-
-class IssueTypeFactory:
-
-    def generate(self, params: dict) -> IssueType:
-        return IssueType(
-            params['id'], params['name'], params['color'], params['displayOrder']
-        )
-
-
-class IssueStatusFactory:
-
-    def generate(self, params: dict) -> IssueStatus:
-        return IssueStatus(
-            params['id'], params['name'], params['color'], params['displayOrder']
-        )
-
-
-class PriorityFactory:
-
-    def generate(self, params: dict) -> Priority:
-        return Priority(params['id'], params['name'])
-
-
-class UserFactory:
-
-    def generate(self, params: Optional[dict]) -> Optional[User]:
-        if params is None:
-            return None
-        else:
-            return User(params['id'], params['userId'], params['name'], params['roleType'])
-
-
-
 class UpdateStatus:
 
     def __init__(self, timestamp: str, user: User):
@@ -92,78 +53,78 @@ class UpdateStatus:
             str(self.user),
         ])
 
-class IssueFactory:
-
-    def __init__(
-            self,
-            userFactory:        UserFactory,
-            issueTypeFactory:   IssueTypeFactory,
-            issueStatusFactory: IssueStatusFactory,
-            priorityFactory:    PriorityFactory
-    ):
-        self.issueTypeFactory = issueTypeFactory
-
-    def generate(self, row: dict) -> Issue:
-        return Issue(
-            row['id'],
-            row['issueKey'],
-            row['keyId'],
-            self.issueTypeFactory.generate(row['issueType']),
-            row['summary'],
-            row['description'],
-            self.userFactory.generate(row['assignee']),
-            self.priorityFactory.generate(row['priority']),
-            self.issueStatusFactory.generate(row['status'])
-        )
-
-
-
 
 with open('./config.json') as f: config = json.load(f)
 
 urlgen    = UrlGenerator(config.get('workspace'))
 
-# url       = urlgen.generate('users/myself')
-# response  = requests.get(url, config)
-# items     = response.json()
-# myself    = User(items.get('id'), items.get('userId'), items.get('name'), items.get('roleType'))
-# print(myself)
 # print('-' * 50)
 
-
-# project_url = urlgen.generate('projects')
-# [print(Project(i.get('id'), i.get('projectKey'), i.get('name'))) for i in requests.get(project_url, config).json()]
+# copied_config            = config.copy()
+# copied_config['count']   = 30
+# copied_config['keyword'] = "集計"
+# del copied_config['workspace']
 #
-# print('-' * 50)
+# issue_url = urlgen.generate('issues')
+# response  = requests.get(issue_url, copied_config)
+#
+# factory = IssueFactory()
+# issues  = [factory.generate(i) for i in response.json()]
+# printer = IssuePrinter()
+# print(printer.sprint(issues));
 
-copied_config            = config.copy()
-copied_config['count']   = 30
-copied_config['keyword'] = "集計"
+
+
+# import curses
+#
+# try:
+#     stdscr = curses.initscr()
+#
+#     stdscr.clear()
+#     stdscr.addstr(0, 0,  '課題一覧')
+#     stdscr.addstr(1, 8, f'キーワード:{copied_config["keyword"]}')
+#     for i, v in enumerate(issues): stdscr.addstr(i + 5, 2, printer.sprint_row(v))
+#     stdscr.refresh()
+#     stdscr.getkey()
+# finally:
+#     curses.nocbreak()
+#     stdscr.keypad(False)
+#     curses.echo()
+#     curses.endwin()
+
+
+category_url = urlgen.generate('projects/KS/categories')
+response     = requests.get(category_url, config)
+print(response.json())
+print('-' * 50)
+
+
+issue_type_factory = IssueTypeFactory()
+issue_type_url     = urlgen.generate('projects/KS/issueTypes')
+response           = requests.get(issue_type_url, config)
+[print(issue_type_factory.generate(i).to_list_item()) for i in response.json()]
+print('-' * 50)
+
+
+status_factory = IssueStatusFactory()
+status_url     = urlgen.generate('statuses')
+response       = requests.get(status_url, config)
+[print(status_factory.generate(i).to_list_item()) for i in response.json()]
+print('-' * 50)
+
+
+copied_config = config.copy()
 del copied_config['workspace']
 
-issue_url = urlgen.generate('issues')
-response  = requests.get(issue_url, copied_config)
-
-factory = IssueFactory()
-issues  = [factory.generate(i) for i in response.json()]
-printer = IssuePrinter()
-
+user_factory = UserFactory()
+user_url     = urlgen.generate('projects/KS/users')
+response     = requests.get(user_url, copied_config)
+[print(user_factory.generate(i).to_list_item()) for i in response.json()]
+print('-' * 50)
 
 
-import curses
-
-try:
-    stdscr = curses.initscr()
-
-    stdscr.clear()
-    stdscr.addstr(0, 0,  '課題一覧')
-    stdscr.addstr(1, 8, f'キーワード:{copied_config["keyword"]}')
-    for i, v in enumerate(issues): stdscr.addstr(i + 5, 2, printer.sprint_row(v))
-    stdscr.refresh()
-    stdscr.getkey()
-finally:
-    curses.nocbreak()
-    stdscr.keypad(False)
-    curses.echo()
-    curses.endwin()
-
+priority_factory = PriorityFactory()
+priority_url     = urlgen.generate('priorities')
+response         = requests.get(priority_url, config)
+[print(priority_factory.generate(i).to_list_item()) for i in response.json()]
+print('-' * 50)
