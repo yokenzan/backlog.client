@@ -3,7 +3,7 @@
 
 import json
 
-from src.api       import Client
+from src.api       import BacklogPyClient
 from src.config    import Config
 from src.usercases import *
 
@@ -68,7 +68,7 @@ from src.usercases import *
 
 with open('./config.json') as f: config = Config(json.load(f))
 
-client = Client(config)
+client = BacklogPyClient(config)
 
 
 get_issue_types = GetIssueTypes(client, IssueTypeFactory())

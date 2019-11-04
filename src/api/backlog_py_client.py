@@ -2,10 +2,10 @@
 
 from typing           import Union
 from BacklogPy        import Backlog
-from .abstract_client import *
+from .abstract_client import AbstractClient
 from src.config       import Config
 
-class Client(AbstractClient):
+class BacklogPyClient(AbstractClient):
 
     def __init__(self, config: Config):
         self.config = config
