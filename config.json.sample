@@ -1,4 +1,5 @@
 {
     "apiKey": "your API key",
     "workspace": "your workspace"
+    "projectKey": "your project key or id"
 }
