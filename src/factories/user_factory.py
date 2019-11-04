@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from typing   import Optional
-from src.user import *
+from typing     import Optional
+from src.models import User
 
 
 class UserFactory:

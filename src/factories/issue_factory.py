@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from src.issue                          import *
-from src.factories.user_factory         import *
-from src.factories.issue_type_factory   import *
-from src.factories.issue_status_factory import *
-from src.factories.priority_factory     import *
-
+from src.models    import Issue
+from src.factories import UserFactory, IssueStatusFactory, IssueTypeFactory, PriorityFactory
 
 class IssueFactory:
 

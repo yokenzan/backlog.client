@@ -3,10 +3,10 @@
 
 from typing import Optional
 
-from src.user         import *
-from src.issue_type   import *
-from src.issue_status import *
-from src.priority     import *
+from .user         import User
+from .issue_type   import IssueType
+from .issue_status import IssueStatus
+from .priority     import Priority
 
 class Issue:
 

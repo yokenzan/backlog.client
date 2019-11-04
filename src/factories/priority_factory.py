@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Union, List, Optional
-from src.priority import *
-
+from src.models import Priority
 
 class PriorityFactory:
 

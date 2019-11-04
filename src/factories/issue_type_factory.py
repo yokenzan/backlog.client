@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Union, List, Optional
-from src.issue_type import *
+from src.models import IssueType
 
 
 class IssueTypeFactory:

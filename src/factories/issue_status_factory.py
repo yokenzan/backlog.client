@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from src.issue_status import *
+from src.models import IssueStatus
 
 class IssueStatusFactory:
 
