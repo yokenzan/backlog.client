@@ -6,7 +6,7 @@ from src.models    import Priority
 from src.factories import PriorityFactory
 from src.api       import AbstractClient
 
-class getPriorities:
+class GetPriorities:
 
     def __init__(self, client: AbstractClient, factory: PriorityFactory):
         self.client  = client
