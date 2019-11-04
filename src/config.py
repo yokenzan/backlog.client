@@ -1,9 +1,17 @@
 # -*- coding: utf-8 -*-
 
-from typing import Union, Optional
+import json
+from typing import Union, Optional, TypeVar
+
+
+T = TypeVar('T', bound = 'Config')
 
 
 class Config:
+
+    @classmethod
+    def load(cls, config_path: str) -> T:
+        with open(config_path) as f: return cls(json.load(f))
 
     def __init__(self, json: dict):
         self.json = json
