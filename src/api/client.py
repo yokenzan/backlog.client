@@ -18,7 +18,7 @@ class Client(AbstractClient):
             self.config.get_project_id_or_key()
         )
 
-    def get_statuses(self) -> dict:
+    def get_issue_statuses(self) -> dict:
         return self.client.get_status_list().json()
 
     def get_projects(self) -> dict:

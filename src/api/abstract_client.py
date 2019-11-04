@@ -10,10 +10,6 @@ class AbstractClient(metaclass = ABCMeta):
         raise NotImplementedError()
 
     @abstractmethod
-    def get_statuses(self) -> dict:
-        raise NotImplementedError()
-
-    @abstractmethod
     def get_projects(self) -> dict:
         raise NotImplementedError()
 
@@ -27,6 +23,10 @@ class AbstractClient(metaclass = ABCMeta):
 
     @abstractmethod
     def get_issue_types(self) -> dict:
+        raise NotImplementedError()
+
+    @abstractmethod
+    def get_issue_statuses(self) -> dict:
         raise NotImplementedError()
 
     @abstractmethod
