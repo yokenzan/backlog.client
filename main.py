@@ -67,15 +67,34 @@ from src.commands  import AddIssue
 #     curses.endwin()
 
 
-with open('./config.json') as f: config = Config(json.load(f))
 
-client            = BacklogPyClient(config)
-add_issue_command = AddIssue(
-    GetUsers(client,         UserFactory()),
-    GetPriorities(client,    PriorityFactory()),
-    GetIssueTypes(client,    IssueTypeFactory()),
-    GetIssueStatuses(client, IssueStatusFactory())
-)
+def add_issue():
 
-add_issue_command.handle()
+    with open('./config.json') as f: config = Config(json.load(f))
+
+    client            = BacklogPyClient(config)
+    add_issue_command = AddIssue(
+        GetUsers(client,         UserFactory()),
+        GetPriorities(client,    PriorityFactory()),
+        GetIssueTypes(client,    IssueTypeFactory()),
+        GetIssueStatuses(client, IssueStatusFactory())
+    )
+
+    add_issue_command.handle()
+
+
+import os
+import subprocess
+
+preferred_editor = os.environ.get('EDITOR')
+
+if preferred_editor is None:
+    preferred_editor = subprocess.run(['which', 'vi'])
+
+import tempfile
+
+with tempfile.NamedTemporaryFile('a+')as f:
+    subprocess.call([preferred_editor, f.name])
+    print(f.read())
+
 
