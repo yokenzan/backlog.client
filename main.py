@@ -6,6 +6,7 @@ import json
 from src.api       import BacklogPyClient
 from src.config    import Config
 from src.usercases import *
+from src.commands  import AddIssue
 
 
 # class IssuePrinter:
@@ -68,28 +69,13 @@ from src.usercases import *
 
 with open('./config.json') as f: config = Config(json.load(f))
 
-client = BacklogPyClient(config)
+client            = BacklogPyClient(config)
+add_issue_command = AddIssue(
+    GetUsers(client,         UserFactory()),
+    GetPriorities(client,    PriorityFactory()),
+    GetIssueTypes(client,    IssueTypeFactory()),
+    GetIssueStatuses(client, IssueStatusFactory())
+)
 
+add_issue_command.handle()
 
-get_issue_types = GetIssueTypes(client, IssueTypeFactory())
-[print(i.to_list_item()) for i in get_issue_types.handle()]
-
-print('-' * 50)
-
-
-get_issue_statuses = GetIssueStatuses(client, IssueStatusFactory())
-[print(i.to_list_item()) for i in get_issue_statuses.handle()]
-
-print('-' * 50)
-
-
-get_users = GetUsers(client, UserFactory())
-[print(i.to_list_item()) for i in get_users.handle()]
-
-print('-' * 50)
-
-
-get_priorities = GetPriorities(client, PriorityFactory())
-[print(i.to_list_item()) for i in get_priorities.handle()]
-
-print('-' * 50)
