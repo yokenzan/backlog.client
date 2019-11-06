@@ -3,10 +3,10 @@
 
 import json
 
-from src.api       import BacklogPyClient
-from src.config    import Config
-from src.usercases import *
-from src.commands  import AddIssue
+from src.api      import BacklogPyClient
+from src.config   import Config
+from src.usecases import *
+from src.commands import AddIssue
 
 
 # class IssuePrinter:
