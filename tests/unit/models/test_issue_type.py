@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import unittest
+from unittest_data_provider import data_provider
 
 from src.models import IssueType
 
@@ -32,3 +33,19 @@ class IssueTypeTest(unittest.TestCase):
         文字列化できること
         """
         self.assertEqual(str(self.issue_type_name), str(self.issue_type))
+
+    __provide_test_getters = lambda: [
+        [1, 'タスク', '#7ea800', 1, ],
+        [2, 'バグ',   '#e30000', 2, ],
+        [3, '要望',   '#ff9200', 3, ],
+        [4, 'その他', '#2779ca', 4, ],
+    ]
+
+    @data_provider(__provide_test_getters)
+    def test_getters(self, id: int, name: str, color: str, order: int):
+        issue_type = IssueType(id, name, color, order)
+
+        self.assertEqual(id,    issue_type.id)
+        self.assertEqual(name,  issue_type.name)
+        self.assertEqual(color, issue_type.color)
+        self.assertEqual(order, issue_type.order)
