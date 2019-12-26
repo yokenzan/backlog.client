@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 class User:
+    """
+        ユーザ
+    """
 
     def __init__(self, id: int, userId: str, name: str, roleType: int):
         self.id       = id

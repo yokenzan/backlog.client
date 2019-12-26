@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 class Priority:
+    """
+        優先度
+    """
 
     def __init__(self, id: int, name: str):
         self.id        = id

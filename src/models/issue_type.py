@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 class IssueType:
+    """
+    課題種別
+    """
 
     def __init__(self, id: int, name: str, color: str, order: int):
         self.id        = id

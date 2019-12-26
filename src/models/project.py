@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 class Project:
+    """
+        プロジェクト
+    """
 
     def __init__(self, id: int, key: str, name: str):
         self.id   = id

@@ -9,6 +9,9 @@ from .issue_status import IssueStatus
 from .priority     import Priority
 
 class Issue:
+    """
+        課題
+    """
 
     def __init__(
             self,

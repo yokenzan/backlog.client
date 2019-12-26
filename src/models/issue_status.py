@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 class IssueStatus:
+    """
+        課題状態
+    """
 
     def __init__(self, id: int, name: str, color: str, order: int):
         self.id        = id
