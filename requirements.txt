@@ -1,2 +1,3 @@
 typing==3.7.4.1
 BacklogPy==1.0.8
+unittest-data-provider==1.0.1
