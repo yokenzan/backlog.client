@@ -13,18 +13,12 @@ class PriorityTest(unittest.TestCase):
         self.priority      = Priority(self.priority_id, self.priority_name)
 
     def test_can_convert_into_list_item(self):
-        """
-        リストの文字列化できること
-        """
         self.assertEqual(
             f"{str(self.priority_id)} # {str(self.priority_name)}",
             self.priority.to_list_item()
         )
 
     def test_can_convert_into_string(self):
-        """
-        文字列化できること
-        """
         self.assertEqual(
             f"{str(self.priority_id)}, {str(self.priority_name)}",
             str(self.priority)

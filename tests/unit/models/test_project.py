@@ -9,9 +9,6 @@ from src.models.project import Project
 class ProjectTest(unittest.TestCase):
 
     def test_can_convert_into_string(self):
-        """
-        文字列化できること
-        """
         params  = [1, 'PR', 'テストプロジェクト']
         project = Project(*params)
 

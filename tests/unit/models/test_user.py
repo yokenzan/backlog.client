@@ -17,18 +17,12 @@ class UserTest(unittest.TestCase):
         )
 
     def test_can_convert_into_list_item(self):
-        """
-        リストの文字列化できること
-        """
         self.assertEqual(
             f"{str(self.user_id)} # {str(self.user_name)}",
             self.user.to_list_item()
         )
 
     def test_can_convert_into_string(self):
-        """
-        文字列化できること
-        """
         self.assertEqual(str(self.user_name), str(self.user))
 
     __provide_test_getters = lambda: [
