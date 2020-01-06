@@ -1,11 +1,17 @@
 # -*- coding: utf-8 -*-
 
-from typing           import Union
-from BacklogPy        import Backlog
+from typing import Union
+
+from BacklogPy import Backlog
+from src.config import Config
+
 from .abstract_client import AbstractClient
-from src.config       import Config
+
 
 class BacklogPyClient(AbstractClient):
+    '''
+    Concrete Backlog API client implemented with ``BacklogPy`` library.
+    '''
 
     def __init__(self, config: Config):
         self.config = config
@@ -39,4 +45,3 @@ class BacklogPyClient(AbstractClient):
 
     def get_project_users(self, project_id_or_key: Union[int, str]) -> dict:
         return self.client.get_project_user_list(project_id_or_key).json()
-
