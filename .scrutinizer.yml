@@ -35,7 +35,7 @@ build:
                 use_website_config: false
             -
                 command: 'pylint-run src'
-                use_website_config: true
+                use_website_config: false
 
 filter:
     excluded_paths:
