@@ -1,0 +1,44 @@
+checks:
+    python:
+        code_rating: true
+        duplicate_code: true
+        typecheck_maybe_no_member: true
+        classes_valid_slots: true
+        basic_missing_reversed_argument: true
+build:
+    dependencies:
+        before:
+            - 'pip install -r requirements-dev.txt'
+    nodes:
+        python36:
+            environment:
+                python: 3.6
+        python37:
+            environment:
+                python: 3.7
+        coverage:
+            tests:
+                override:
+                    -
+                        command: 'coverage run --source src -m unittest discover tests'
+                        coverage:
+                            file: '.coverage'
+                            format: 'py-cc'
+    project_setup:
+        override:
+            - 'true'
+    tests:
+        override:
+            - py-scrutinizer-run
+            -
+                command: 'python3 -m unittest discover -v tests'
+                use_website_config: false
+            -
+                command: 'pylint-run src'
+                use_website_config: true
+
+filter:
+    excluded_paths:
+        - '*/tests/*'
+    dependency_paths:
+        - 'lib/*'
