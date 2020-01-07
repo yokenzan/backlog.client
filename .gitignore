@@ -1,6 +1,6 @@
 __pycache__
 *.pyc
-config.json
-Session.vim
-tags
+/config.json
+/Session.vim
+/tags
 /G*
