@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import os
-import subprocess
-from src.config import Config
+from src.config          import Config
+from .editor_detector    import EditorDetector
+from .sub_process_runner import SubProcessRunner
 
 
 class EditFileWithEditor:
@@ -11,41 +11,30 @@ class EditFileWithEditor:
 
     Attributes
     ----------
-    config : Config
-        Configuration values.
+    editor_detector : EditorDetector
+        Object resolving editor launcher command.
+    sub_process_runner : SubProcessRunner
+        Runs sub procces.
     '''
 
-    def __init__(self, config: Config):
-        self.config = config
+    def __init__(
+        self,
+        editor_detector: EditorDetector,
+        sub_process_runner: SubProcessRunner
+    ):
+        self.editor_detector    = editor_detector
+        self.sub_process_runner = sub_process_runner
 
     def handle(self, edit_file: str):
         '''
-        Launch editor and edit file with it.
+        Launchs editor and edit file with it.
 
         Parameters
         ----------
         edit_file : str
             path of file to edit.
         '''
-        subprocess.run([self.__detect_editor(), edit_file], check=True)
-
-    def __detect_editor(self) -> str:
-        '''
-        Detect editor launcher command.
-
-        Returns
-        -------
-        str
-            Returns a command string treated as an editor launcher.
-        '''
-        preferred_editor = self.config.get_editor()
-
-        if preferred_editor is not None:
-            return preferred_editor
-
-        preferred_editor = os.environ.get('EDITOR')
-
-        if preferred_editor is not None:
-            return preferred_editor
-
-        return subprocess.run(['which', 'vi'], check=True)
+        self.sub_process_runner.run([
+            self.editor_detector.detect(),
+            edit_file
+        ])
