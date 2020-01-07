@@ -33,10 +33,16 @@ class UserTest(unittest.TestCase):
     ]
 
     @data_provider(__provide_test_getters)
-    def test_getters(self, id: int, key_id: str, name: str, role_type: int):
-        user = User(id, key_id, name, role_type)
+    def test_getters(
+            self,
+            user_id: int,
+            key_id: str,
+            name: str,
+            role_type: int
+    ):
+        user = User(user_id, key_id, name, role_type)
 
-        self.assertEqual(id,        user.id)
+        self.assertEqual(user_id,   user.user_id)
         self.assertEqual(key_id,    user.userId)
         self.assertEqual(name,      user.name)
         self.assertEqual(role_type, user.roleType)

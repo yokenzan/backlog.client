@@ -24,10 +24,10 @@ class ProjectTest(unittest.TestCase):
     ]
 
     @data_provider(__provide_test_getters)
-    def test_getters(self, id: int, key: str, name: str):
-        project = Project(id, key, name)
+    def test_getters(self, project_id: int, key: str, name: str):
+        project = Project(project_id, key, name)
 
-        self.assertEqual(id,   project.id)
-        self.assertEqual(key,  project.key)
-        self.assertEqual(name, project.name)
+        self.assertEqual(project_id, project.project_id)
+        self.assertEqual(key,        project.key)
+        self.assertEqual(name,       project.name)
 

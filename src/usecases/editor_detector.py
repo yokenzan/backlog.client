@@ -20,10 +20,10 @@ class EditorDetector:
 
     def __init__(
             self,
-            config: Config,
+            config:             Config,
             sub_process_runner: SubProcessRunner
     ):
-        self.config = config
+        self.config             = config
         self.sub_process_runner = sub_process_runner
 
     def detect(self) -> str:

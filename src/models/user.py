@@ -2,11 +2,11 @@
 
 class User:
     """
-        ユーザ
+    Backlog user.
     """
 
-    def __init__(self, id: int, userId: str, name: str, roleType: int):
-        self.id       = id
+    def __init__(self, user_id: int, userId: str, name: str, roleType: int):
+        self.user_id  = user_id
         self.userId   = userId
         self.name     = name
         self.roleType = roleType
@@ -15,5 +15,5 @@ class User:
         return self.name
 
     def to_list_item(self) -> str:
-        return f'{str(self.id)} # {self.name}'
+        return f'{str(self.user_id)} # {self.name}'
 

@@ -21,7 +21,8 @@ class IssueTypeTest(unittest.TestCase):
 
     def test_can_convert_into_list_item(self):
         self.assertEqual(
-            f"{str(self.issue_type_id)} # {str(self.issue_type_name)} {str(self.issue_type_color)}",
+            f"{str(self.issue_type_id)} # {str(self.issue_type_name)} "
+            f"{str(self.issue_type_color)}",
             self.issue_type.to_list_item()
         )
 
@@ -36,10 +37,10 @@ class IssueTypeTest(unittest.TestCase):
     ]
 
     @data_provider(__provide_test_getters)
-    def test_getters(self, id: int, name: str, color: str, order: int):
-        issue_type = IssueType(id, name, color, order)
+    def test_getters(self, type_id: int, name: str, color: str, order: int):
+        issue_type = IssueType(type_id, name, color, order)
 
-        self.assertEqual(id,    issue_type.id)
-        self.assertEqual(name,  issue_type.name)
-        self.assertEqual(color, issue_type.color)
-        self.assertEqual(order, issue_type.order)
+        self.assertEqual(type_id, issue_type.type_id)
+        self.assertEqual(name,    issue_type.name)
+        self.assertEqual(color,   issue_type.color)
+        self.assertEqual(order,   issue_type.order)
