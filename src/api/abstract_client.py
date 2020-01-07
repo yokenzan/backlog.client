@@ -120,4 +120,3 @@ class AbstractClient(metaclass=ABCMeta):
             Raises when this method is not overriden by sub class.
         '''
         raise NotImplementedError()
-

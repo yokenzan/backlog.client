@@ -8,12 +8,12 @@ from src.models import User
 
 class UserTest(unittest.TestCase):
     def setUp(self):
-        self.user_id     = 1
-        self.user_key_id = "USER_KEY"
-        self.user_name   = "USER_NAME"
-        self.role_type   = 1
-        self.user        = User(
-            self.user_id, self.user_key_id, self.user_name, self.role_type
+        self.user_id   = 1
+        self.user_key  = "USER_KEY"
+        self.user_name = "USER_NAME"
+        self.role_type = 1
+        self.user      = User(
+            self.user_id, self.user_key, self.user_name, self.role_type
         )
 
     def test_can_convert_into_list_item(self):
@@ -35,15 +35,15 @@ class UserTest(unittest.TestCase):
     @data_provider(__provide_test_getters)
     def test_getters(
             self,
-            user_id: int,
-            key_id: str,
-            name: str,
+            user_id:   int,
+            key:       str,
+            name:      str,
             role_type: int
     ):
-        user = User(user_id, key_id, name, role_type)
+        user = User(user_id, key, name, role_type)
 
         self.assertEqual(user_id,   user.user_id)
-        self.assertEqual(key_id,    user.userId)
+        self.assertEqual(key,       user.user_key)
         self.assertEqual(name,      user.name)
         self.assertEqual(role_type, user.roleType)
 

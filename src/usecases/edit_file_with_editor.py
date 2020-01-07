@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from src.config          import Config
 from .editor_detector    import EditorDetector
 from .sub_process_runner import SubProcessRunner
 
