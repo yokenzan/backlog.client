@@ -4,3 +4,4 @@ __pycache__
 /Session.vim
 /tags
 /G*
+/.coverage
