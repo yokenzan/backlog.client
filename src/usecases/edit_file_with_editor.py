@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from src.config          import Config
-from .editor_detector    import EditorDetector
+from src.config import Config
+from .editor_detector import EditorDetector
 from .sub_process_runner import SubProcessRunner
 
 
@@ -18,11 +18,11 @@ class EditFileWithEditor:
     '''
 
     def __init__(
-        self,
-        editor_detector: EditorDetector,
-        sub_process_runner: SubProcessRunner
+            self,
+            editor_detector: EditorDetector,
+            sub_process_runner: SubProcessRunner
     ):
-        self.editor_detector    = editor_detector
+        self.editor_detector = editor_detector
         self.sub_process_runner = sub_process_runner
 
     def handle(self, edit_file: str):

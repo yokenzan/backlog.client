@@ -2,10 +2,12 @@
 
 from src.models import IssueStatus
 
-class IssueStatusFactory:
 
+class IssueStatusFactory:
     def generate(self, params: dict) -> IssueStatus:
         return IssueStatus(
-            params['id'], params['name'], params['color'], params['displayOrder']
+            params["id"],
+            params["name"],
+            params["color"],
+            params["displayOrder"]
         )
-

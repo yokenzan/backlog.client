@@ -14,7 +14,7 @@ class Config:
     Attributes
     ----------
     json : dict
-        a dictionary of configuration values
+        Dictionary of configuration values.
     '''
 
     @classmethod
@@ -42,27 +42,39 @@ class Config:
     def get_project_id_or_key(self) -> Union[str, int, None]:
         '''
         Gets project id or key.
-        '''
 
+        Returns
+        -------
+        Union[str, int, None]
+        '''
         return self.json.get('projectId') or self.json.get('projectKey')
 
     def get_api_key(self) -> Optional[str]:
         '''
         Gets API key.
-        '''
 
+        Returns
+        -------
+        Optional[str]
+        '''
         return self.json.get('apiKey')
 
     def get_workspace(self) -> Optional[str]:
         '''
         Gets workspace key.
-        '''
 
+        Returns
+        -------
+        Optional[str]
+        '''
         return self.json.get('workspace')
 
     def get_editor(self) -> Optional[str]:
         '''
         Gets editor launcher command.
-        '''
 
+        Returns
+        -------
+        Optional[str]
+        '''
         return self.json.get('editor')

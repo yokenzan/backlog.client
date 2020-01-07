@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
-from src.config          import Config
+from src.config import Config
 
 from .sub_process_runner import SubProcessRunner
 
@@ -19,11 +19,11 @@ class EditorDetector:
     '''
 
     def __init__(
-        self,
-        config: Config,
-        sub_process_runner: SubProcessRunner
+            self,
+            config: Config,
+            sub_process_runner: SubProcessRunner
     ):
-        self.config             = config
+        self.config = config
         self.sub_process_runner = sub_process_runner
 
     def detect(self) -> str:
