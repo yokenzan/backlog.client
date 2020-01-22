@@ -23,4 +23,3 @@ class AddIssue:
         for usecase in self.usecases:
             [print(i.to_list_item()) for i in usecase.handle()]
             print('-' * 50)
-

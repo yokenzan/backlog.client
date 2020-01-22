@@ -11,9 +11,9 @@ from src.usecases import SubProcessRunner
 
 class EditorDetectorTest(unittest.TestCase):
     def test_config_is_prior_to_others(self):
-        config_editor   = 'configured editor'
-        config          = Config({ 'editor': config_editor })
-        detector        = EditorDetector(config, SubProcessRunner())
+        config_editor = 'configured editor'
+        config        = Config({ 'editor': config_editor })
+        detector      = EditorDetector(config, SubProcessRunner())
 
         self.assertEqual(config_editor, detector.detect())
 
@@ -25,7 +25,7 @@ class EditorDetectorTest(unittest.TestCase):
             EditorDetector(Config({}), SubProcessRunner()).detect()
         )
 
-    def test_vi_path_is_returnd_if_neigther_of_config_nor_env_is_exists(self):
+    def test_vi_path_is_returnd_if_neigther_of_config_nor_env_exists(self):
         os.environ.pop('EDITOR')
 
         self.assertEqual(

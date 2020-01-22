@@ -18,5 +18,5 @@ class GetUsers:
         Executes fetching from API.
         """
         return [
-            self.factory.generate(issue) for issue in self.client.get_users()
+            self.factory.generate(user) for user in self.client.get_users()
         ]
